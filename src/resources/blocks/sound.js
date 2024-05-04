@@ -7,7 +7,7 @@ const categoryColor = '#CF63CF';
 function register() {
     // start playing a sound (and also it needs to load lol!!)
     registerBlock(`${categoryPrefix}startsound`, {
-        message0: 'start sound %1',
+        message0: 'play sound %1',
         args0: [
             {
                 "type": "field_input",
