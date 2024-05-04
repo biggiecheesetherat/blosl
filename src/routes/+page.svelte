@@ -74,7 +74,6 @@
     registerConversions();
     registerVariables();
     registerJSON();
-    registerBlocks();
     registerFunctions();
     registerDebug();
 
