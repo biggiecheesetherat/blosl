@@ -392,22 +392,7 @@
     <input
         class="project-name"
         type="text"
-        placeholder="Extension ID (ex: extensionID)"
-        style="margin-left:4px;margin-right:4px"
-        data-invalid={isExtensionIDInvalid(projectID)}
-        bind:value={projectID}
-        on:change={updateGeneratedCode}
-    />
-    {#if isExtensionIDInvalid(projectID)}
-        <p style="color:white;margin-left:4px">
-            <b>Extension ID must be only letters and numbers.</b>
-        </p>
-    {/if}
-    <NavigationDivider />
-    <input
-        class="project-name"
-        type="text"
-        placeholder="Extension Name (ex: Extension)"
+        placeholder="Filename (ex: EpicOSLProgram)"
         style="margin-left:4px;margin-right:4px"
         bind:value={projectName}
         on:change={updateGeneratedCode}
@@ -417,43 +402,7 @@
     <div class="row-menus">
         <div class="row-first-submenus">
             <div class="blockMenuButtons">
-                <StyledButton
-                    on:click={() => {
-                        ModalState.extensionColors = true;
-                    }}
-                >
-                    Edit Extension Colors
-                </StyledButton>
                 <div style="margin-left:8px" />
-                <!--<StyledButton
-                    on:click={() => {
-                        CreateBlockModalScript.open();
-                    }}
-                >
-                    Create an Extension Block
-                </StyledButton> wont need this since im changing the system -->
-                <div style="margin-left:8px" />
-                <div class="extensionMenuPreview">
-                    <div style="text-align: center;">
-                        {#if !extensionImageStates.icon.loading && !extensionImageStates.icon.failed && extensionImageStates.icon.image}
-                            <div
-                                class="extensionBubbleIcon"
-                                style={`border: 0; border-radius: 0; background-image: url(${extensionImageStates.icon.image})`}
-                            />
-                        {:else}
-                            <div
-                                class="extensionBubbleIcon"
-                                style={`background: ${extensionMetadata.color1}; border-color: ${extensionMetadata.color2}`}
-                            />
-                        {/if}
-                        <div class="extensionBubbleName">
-                            {#if projectName}
-                                {projectName}
-                            {:else}
-                                Extension
-                            {/if}
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="blocklyWrapper">
@@ -461,67 +410,9 @@
             </div>
         </div>
         <div class="row-submenus">
-            <div class="assetsWrapper">
-                <h1>Assets</h1>
-                <p>
-                    Extra things that will appear under
-                    {#if projectName}
-                        "{projectName}"
-                    {:else}
-                        "Extension"
-                    {/if}
-                    in the block list.
-                    <br />
-                    These things are not required, so you can leave them empty if
-                    you do not need them.
-                </p>
-                <p>
-                    Documentation URL:
-                    <input
-                        type="text"
-                        placeholder="https://..."
-                        bind:value={extensionMetadata.docsURL}
-                        on:change={updateGeneratedCode}
-                    />
-                </p>
-                <p>
-                    Extension Icon:
-                    <input type="file" on:change={extensionIconAdded} />
-                </p>
-                {#if !extensionImageStates.icon.loading && !extensionImageStates.icon.failed && extensionImageStates.icon.image}
-                    <img
-                        alt="Extension Icon"
-                        title="Extension Icon"
-                        class="extensionIcon"
-                        src={extensionImageStates.icon.image}
-                    />
-                {/if}
-                {#if extensionImageStates.icon.image}
-                    {#if extensionImageStates.icon.failed}
-                        <p class="warning">
-                            The extension icon is not an image, this may appear
-                            broken in the category list.
-                        </p>
-                    {/if}
-                    {#if !extensionImageStates.icon.square}
-                        <p class="warning">
-                            The image is not square, this may appear broken in
-                            the category list.
-                        </p>
-                    {/if}
-                {/if}
-                <h3>Extra Icons</h3>
-                <p>
-                    Blocks can use their own icons instead of the Extension
-                    icon.
-                    <br />
-                    Add more images here to use them.
-                </p>
-                <StyledButton>Add Image</StyledButton>
-            </div>
             <div class="row-subsubmenus">
                 <div class="codeActionsWrapper">
-                    <p style="margin-right: 12px"><b>Extension Code</b></p>
+                    <p style="margin-right: 12px"><b>OSL Code</b></p>
                     <StyledButton
                         on:click={() => {
                             // copy code
