@@ -20,45 +20,7 @@ function register() {
         colour: categoryColor
     }, (block) => {
         const LOG = javascriptGenerator.valueToCode(block, 'LOG', javascriptGenerator.ORDER_ATOMIC);
-        const code = `console.log(${LOG});`;
-        return `${code}\n`;
-    })
-
-    // console.warn
-    registerBlock(`${categoryPrefix}warn`, {
-        message0: 'warn %1',
-        args0: [
-            {
-                "type": "input_value",
-                "name": "LOG"
-            }
-        ],
-        previousStatement: null,
-        nextStatement: null,
-        inputsInline: true,
-        colour: categoryColor
-    }, (block) => {
-        const LOG = javascriptGenerator.valueToCode(block, 'LOG', javascriptGenerator.ORDER_ATOMIC);
-        const code = `console.warn(${LOG});`;
-        return `${code}\n`;
-    })
-
-    // console.error
-    registerBlock(`${categoryPrefix}error`, {
-        message0: 'error %1',
-        args0: [
-            {
-                "type": "input_value",
-                "name": "LOG"
-            }
-        ],
-        previousStatement: null,
-        nextStatement: null,
-        inputsInline: true,
-        colour: categoryColor
-    }, (block) => {
-        const LOG = javascriptGenerator.valueToCode(block, 'LOG', javascriptGenerator.ORDER_ATOMIC);
-        const code = `console.error(${LOG});`;
+        const code = `say ${LOG}`;
         return `${code}\n`;
     })
 
@@ -78,7 +40,7 @@ function register() {
         colour: categoryColor
     }, (block) => {
         const RAW = block.getFieldValue('RAW')
-        const code = `${RAW};`;
+        const code = `${RAW}`;
         return `${code}\n`;
     })
 
@@ -118,49 +80,6 @@ function register() {
         const COMMENT = block.getFieldValue('COMMENT')
         const code = `// ${COMMENT}`;
         return `${code}\n`;
-    })
-
-    // comment
-    registerBlock(`${categoryPrefix}commentstack`, {
-        message0: '/* %1 %2 */',
-        args0: [
-            {
-                "type": "input_dummy"
-            },
-            {
-                "type": "input_statement",
-                "name": "BLOCKS"
-            }
-        ],
-        previousStatement: null,
-        nextStatement: null,
-        inputsInline: true,
-        colour: categoryColor
-    }, (block) => {
-        const BLOCKS = javascriptGenerator.statementToCode(block, 'BLOCKS');
-        const code = `/*
-${BLOCKS}*/;`;
-        return `${code}\n`;
-    })
-
-    // code ran?
-    registerBlock(`${categoryPrefix}catch`, {
-        message0: 'code finished successfully? (runs code) %1 %2',
-        args0: [
-            {
-                "type": "input_dummy"
-            },
-            {
-                "type": "input_statement",
-                "name": "FUNC"
-            }
-        ],
-        output: "Boolean",
-        inputsInline: true,
-        colour: categoryColor,
-    }, (block) => {
-        const FUNC = javascriptGenerator.statementToCode(block, 'FUNC');
-        return [`await (async () => { try { ${FUNC} return true; } catch { return false; } })()`, javascriptGenerator.ORDER_ATOMIC];
     })
 }
 
